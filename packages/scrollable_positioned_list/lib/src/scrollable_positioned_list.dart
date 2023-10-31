@@ -99,7 +99,7 @@ class ScrollablePositionedList extends StatefulWidget {
 
   /// Called to build children for the list with
   /// 0 <= index < itemCount.
-  final IndexedWidgetBuilder itemBuilder;
+  final NullableIndexedWidgetBuilder itemBuilder;
 
   /// Called to build separators for between each item in the list.
   /// Called with 0 <= index < itemCount - 1.

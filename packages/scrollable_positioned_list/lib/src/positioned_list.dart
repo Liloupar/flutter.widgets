@@ -54,7 +54,7 @@ class PositionedList extends StatefulWidget {
 
   /// Called to build children for the list with
   /// 0 <= index < itemCount.
-  final IndexedWidgetBuilder itemBuilder;
+  final NullableIndexedWidgetBuilder itemBuilder;
 
   /// If not null, called to build separators for between each item in the list.
   /// Called with 0 <= index < itemCount - 1.
@@ -244,12 +244,13 @@ class _PositionedListState extends State<PositionedList> {
   }
 
   Widget _buildItem(int index) {
-    return RegisteredElementWidget(
+    var child = widget.itemBuilder(context, index);
+    return child?? RegisteredElementWidget(
       key: ValueKey(index),
       child: widget.addSemanticIndexes
           ? IndexedSemantics(
-              index: index, child: widget.itemBuilder(context, index))
-          : widget.itemBuilder(context, index),
+              index: index, child: child)
+          : child!,
     );
   }
 
