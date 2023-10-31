@@ -235,7 +235,7 @@ class _PositionedListState extends State<PositionedList> {
         ),
       );
 
-  Widget _buildSeparatedListElement(int index) {
+  Widget? _buildSeparatedListElement(int index) {
     if (index.isEven) {
       return _buildItem(index ~/ 2);
     } else {
@@ -243,15 +243,14 @@ class _PositionedListState extends State<PositionedList> {
     }
   }
 
-  Widget _buildItem(int index) {
+  Widget? _buildItem(int index) {
     var child = widget.itemBuilder(context, index);
-    return child?? RegisteredElementWidget(
-      key: ValueKey(index),
-      child: widget.addSemanticIndexes
-          ? IndexedSemantics(
-              index: index, child: child)
-          : child!,
-    );
+    return child != null
+        ? RegisteredElementWidget(
+            key: ValueKey(index),
+            child: widget.addSemanticIndexes ? IndexedSemantics(index: index, child: child) : child,
+          )
+        : null;
   }
 
   EdgeInsets get _leadingSliverPadding =>
